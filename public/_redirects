@@ -1,2 +1,2 @@
-/api/*     https://microgelcell-annotator-backend.onrender.com/api/:splat      200
-/uploads/* https://microgelcell-annotator-backend.onrender.com/uploads/:splat   200
+/api/*     https://azirangee-microgelcell-annotator.hf.space/api/:splat      200
+/uploads/* https://azirangee-microgelcell-annotator.hf.space/uploads/:splat  200
