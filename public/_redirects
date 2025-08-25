@@ -1,0 +1,2 @@
+/api/*     https://microgelcell-annotator-backend.onrender.com/api/:splat      200
+/uploads/* https://microgelcell-annotator-backend.onrender.com/uploads/:splat   200
