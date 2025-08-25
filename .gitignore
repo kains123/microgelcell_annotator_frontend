@@ -1,0 +1,73 @@
+# ---------------------------------------
+# Node.js (npm) .gitignore
+# ---------------------------------------
+
+# 의존성
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+
+# 빌드 아티팩트
+dist/
+build/
+lib/
+out/
+*.tsbuildinfo
+
+# 번들러/도구 캐시
+.cache/
+.parcel-cache/
+.vite/
+.next/
+.nuxt/
+.svelte-kit/
+.turbo/
+
+# 로그 & PID
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# 환경 변수(민감정보)
+.env
+.env.*
+*.local
+
+# 테스트/커버리지
+coverage/
+.nyc_output/
+.playwright-report/
+test-results/
+cypress/screenshots/
+cypress/videos/
+
+# 린터/툴 캐시
+.eslintcache
+.stylelintcache
+
+# IDE/OS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# 스토리북/문서
+storybook-static/
+.styleguide/
+
+# 이미지 최적화 캐시
+.imagemin-cache/

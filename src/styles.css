@@ -1,0 +1,44 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:#111}
+
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;z-index:10}
+.container{max-width:1200px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:0}
+
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.card{border:1px solid #eee;border-radius:8px;padding:12px;margin:12px 0}
+
+.grid{display:grid;grid-template-columns:300px 1fr;gap:16px}
+.sidebar{border-right:1px solid #eee;padding-right:12px}
+.thumb{display:flex;gap:8px;align-items:center;padding:6px;border-radius:8px;border:1px solid #eee;margin-bottom:8px;cursor:pointer}
+.thumb.active{border-color:#6b8cff;background:#f3f6ff}
+.thumb img{width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid #ddd}
+
+.btn{padding:8px 12px;border:1px solid #ddd;border-radius:6px;background:#fafafa;cursor:pointer}
+.btn.primary{background:#1a73e8;color:#fff;border-color:#1a73e8}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.select{padding:6px 8px;border:1px solid #ddd;border-radius:6px}
+
+.counts{display:flex;gap:10px;flex-wrap:wrap}
+.count-pill{padding:4px 10px;background:#f4f6f8;border-radius:14px;border:1px solid #e3e7ee;font-size:12px}
+
+.small{font-size:12px;color:#666}
+hr{border:none;border-top:1px solid #eee;margin:12px 0}
+
+/* Chips */
+.chip{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #ddd;border-radius:16px;background:#fff;cursor:pointer}
+.chip-active{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,0.12) inset}
+.dot{display:inline-block;width:10px;height:10px;border-radius:999px;border:1px solid rgba(0,0,0,.15)}
+
+/* Mode buttons */
+.mode-btn{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer}
+.mode-btn kbd{font-size:11px;border:1px solid #ddd;padding:2px 6px;border-radius:4px;background:#f5f5f5}
+.mode-btn.active{border-color:#1a73e8;background:#f6faff}
+
+/* On-canvas counts (top-right) */
+.overlay-counts{position:absolute;right:8px;top:8px;display:flex;gap:8px;flex-wrap:wrap;z-index:5}
+.overlay-pill{display:flex;align-items:center;gap:6px;padding:4px 8px;background:rgba(255,255,255,.9);border:1px solid #e5eaf0;border-radius:999px;font-size:12px}
+
+/* Dropzone highlight */
+.dropzone{border:2px dashed #d0d7de;background:#fafbfc}
+.dropzone.dragover{border-color:#1a73e8;background:#f6faff}
