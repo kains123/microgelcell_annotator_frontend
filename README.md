@@ -3,7 +3,7 @@
 ## Try it!
 https://incomparable-bonbon-827d75.netlify.app/
 
-![demo](assets/Screen Recording 2025-08-26 at 01.14.27.gif)
+![demo](src/assets/Screen%20Recording%202025-08-26%20at%2001.14.27.gif)
 
 
 Interactive web UI to:
