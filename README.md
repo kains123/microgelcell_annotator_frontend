@@ -1,5 +1,11 @@
 # Microgel & Cell Annotator — Frontend (React + TypeScript + Vite + Konva)
 
+## Try it!
+https://incomparable-bonbon-827d75.netlify.app/
+
+![demo](assets/Screen Recording 2025-08-26 at 01.14.27.gif)
+
+
 Interactive web UI to:
 - upload microscope images,
 - run detection through the backend model,

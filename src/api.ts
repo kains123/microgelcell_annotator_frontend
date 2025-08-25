@@ -1,75 +1,67 @@
-export async function detect(files: File[], conf?: number | string, iou?: number | string) {
+// api.ts
+export async function detect(files: File[], conf: string, iou: string) {
   const fd = new FormData();
-  files.forEach(f => fd.append("files", f));
-  if (conf !== undefined) fd.append("conf", String(conf).replace(",", "."));
-  if (iou !== undefined) fd.append("iou", String(iou).replace(",", "."));
-  const res = await fetch("/api/detect", { method: "POST", body: fd });
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
+  for (const f of files) fd.append("files", f);
+  fd.append("conf", conf);
+  fd.append("iou", iou);
+
+  const r = await fetch("/api/detect", { method: "POST", body: fd });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
 }
 
-export async function exportYolo(payload: any) {
-  const res = await fetch("/api/export/yolo", {
+export async function exportYolo(payload: { images: any[]; classMap: any }) {
+  const r = await fetch("/api/export/yolo", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
-  if (!res.ok) throw new Error(await res.text());
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "labels_yolo.zip";
-  a.click();
-  URL.revokeObjectURL(url);
+  if (!r.ok) throw new Error(await r.text());
+  const blob = await r.blob();
+  downloadBlob(blob, "labels_yolo.zip");
 }
 
-export async function exportYoloTxt(imagePayload: any) {
-  const res = await fetch("/api/export/yolo/txt", {
+export async function exportYoloTxt(image: any) {
+  const r = await fetch("/api/export/yolo/txt", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ image: imagePayload })
+    body: JSON.stringify({ image }),
   });
-  if (!res.ok) throw new Error(await res.text());
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  const stem = String(imagePayload.filename || "image").replace(/\.[^.]+$/, "");
-  a.href = url;
-  a.download = `${stem}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
+  if (!r.ok) throw new Error(await r.text());
+  const name = (image.filename || image.storedFilename || "image").replace(/\.[^.]+$/, "");
+  const blob = await r.blob();
+  downloadBlob(blob, `${name}.txt`);
 }
 
-export async function exportExcelOne(imagePayload: any, rules: { overlap_iou: number; edge_outside_percent: number; }) {
-  const res = await fetch("/api/export/excel/one", {
+export async function exportExcelOne(image: any, rules: { overlap_iou: number; edge_outside_percent: number }) {
+  const r = await fetch("/api/export/excel/one", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ image: imagePayload, rules })
+    body: JSON.stringify({ image, rules }),     // ← 단수 key: image
   });
-  if (!res.ok) throw new Error(await res.text());
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  const stem = String(imagePayload.filename || "image").replace(/\.[^.]+$/, "");
-  a.href = url;
-  a.download = `microgel_cell_report_${stem}.xlsx`;
-  a.click();
-  URL.revokeObjectURL(url);
+  if (!r.ok) throw new Error(await r.text());
+  const name = (image.filename || image.storedFilename || "image").replace(/\.[^.]+$/, "");
+  const blob = await r.blob();
+  downloadBlob(blob, `microgel_cell_report_${name}.xlsx`);
 }
 
-export async function exportExcelEachZip(payload: any, rules: { overlap_iou: number; edge_outside_percent: number; }) {
-  const res = await fetch("/api/export/excel/each", {
+export async function exportExcelEachZip(
+  images: any[],
+  rules: { overlap_iou: number; edge_outside_percent: number }
+) {
+  const r = await fetch("/api/export/excel/each", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...payload, rules })
+    body: JSON.stringify({ images, rules }),    // ← 복수 key: images
   });
-  if (!res.ok) throw new Error(await res.text());
-  const blob = await res.blob();
+  if (!r.ok) throw new Error(await r.text());
+  const blob = await r.blob();
+  downloadBlob(blob, "excel_each.zip");
+}
+
+function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = url;
-  a.download = "excel_each.zip";
-  a.click();
+  a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
 }

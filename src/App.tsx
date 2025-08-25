@@ -145,13 +145,21 @@ export default function App() {
 
   async function downloadExcelEachIndividually() {
     for (const img of images) {
-      await exportExcelOne(img, { overlap_iou: rules.overlapIoU, edge_outside_percent: rules.edgeOutsidePercent });
+      await exportExcelOne(img, {
+        overlap_iou: rules.overlapIoU,
+        edge_outside_percent: rules.edgeOutsidePercent,
+      });
     }
   }
-  function downloadExcelEachAsZip() {
-    exportExcelEachZip({ images, classMap }, { overlap_iou: rules.overlapIoU, edge_outside_percent: rules.edgeOutsidePercent });
-  }
 
+  // ZIP으로 한 번에
+  function downloadExcelEachAsZip() {
+    exportExcelEachZip(images, {                 // ← 첫 번째 인자: images 배열 (classMap 필요 없음)
+      overlap_iou: rules.overlapIoU,
+      edge_outside_percent: rules.edgeOutsidePercent,
+    });
+  }
+  
   return (
     <div>
       <header>
